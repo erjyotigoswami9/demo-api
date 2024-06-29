@@ -1,30 +1,19 @@
 const express = require("express") ;
-const mongoose = require("mongoose") ;
-const UserModel = require("../model/user.model") ;
-
+const auth = require("../middleware/auth") ;
+const {login, register, data, logout, token , writing } = require("../controller/user.controller") ;
 const userRouter = express.Router() ;
+const {roleMiddleWare_reader, roleMiddleWare_writer} = require("../middleware/role.middleware") ;
 
-userRouter.get('/data', async(req,res)=>{
-    try {
-        let usersData = await UserModel.find() ;
-        res.status(200).send(usersData) ;
-    } catch (error) {
-        console.log(error) ;
-        res.status(400).send({error}) ;
-    }
-})
+userRouter.get('/data', [auth,roleMiddleWare_reader] , data) ;
 
-userRouter.post('/register', async(req,res)=>{
-    try {
-        let userData = req.body ;
-        console.log(userData) ;
-        let data = new UserModel(userData) ;
-        data.save() ;
-        res.status(200).send(data) ;
-    } catch (error) {
-        console.log(error) ;
-        res.status(400).send({error}) ;
-    }
-})
+userRouter.get('/writer', [auth,roleMiddleWare_writer], writing) ;
+
+userRouter.post('/register', register)
+
+userRouter.post("/login",login)
+
+userRouter.get('/logout', logout)
+
+userRouter.get("/token", token)
 
 module.exports = userRouter ;

@@ -5,9 +5,11 @@ const connection = require("./config/db") ;
 
 const server = express()  ;
 const userRouter = require("./routes/user.route") ;
+const todoRouter = require("./routes/todo.route") ;
 
 server.use(express.json())  ;
 server.use("/user",userRouter) ;
+server.use("/todo",todoRouter) ;
 
 server.get('/', (req,res)=>{
     try {
