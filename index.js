@@ -2,12 +2,16 @@
 const express = require("express") ;
 const dotenv = require("dotenv").config() ;
 const connection = require("./config/db") ;
+const cors = require("cors") ;
 
 const server = express()  ;
 const userRouter = require("./routes/user.route") ;
 const todoRouter = require("./routes/todo.route") ;
 
 server.use(express.json())  ;
+server.use(cors({
+    origin : "http://127.0.0.1:5173/"
+})) ;
 server.use("/user",userRouter) ;
 server.use("/todo",todoRouter) ;
 

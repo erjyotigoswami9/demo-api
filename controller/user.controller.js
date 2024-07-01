@@ -27,7 +27,7 @@ const login =  async(req,res)=>{
             }
         })
         }else{
-            es.status(200).send({"msg":"email not matched!"})
+            res.status(200).send({"msg":"email not matched!"})
         }
     } catch (error) {
         console.log(error) ;
