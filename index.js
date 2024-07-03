@@ -10,8 +10,11 @@ const todoRouter = require("./routes/todo.route") ;
 
 server.use(express.json())  ;
 server.use(cors({
-    origin : "http://127.0.0.1:5173/"
+    origin : "http://127.0.0.1:5173/",
+    methods : ["GET","POST","PATCH","DELETE"],
+    credentials : true
 })) ;
+server.use(cors()) ;
 server.use("/user",userRouter) ;
 server.use("/todo",todoRouter) ;
 
