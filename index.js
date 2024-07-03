@@ -10,7 +10,7 @@ const todoRouter = require("./routes/todo.route") ;
 
 server.use(express.json())  ;
 server.use(cors({
-    origin : "http://127.0.0.1:5173/",
+    origin : "https://todo-frontend-api-connected.vercel.app/",
     methods : ["GET","POST","PATCH","DELETE"],
     credentials : true
 })) ;
